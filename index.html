@@ -1,12 +1,12 @@
 <h1>Hello You!</h1>
 
-<h2>Game : Heads or Tails 🪙</h2>
+<h2>Game : Yin or Yang 🪙</h2>
 <button onclick="flipCoin()">Toss a coin</button>
 <p id="result" style="font-size: 1.5em; margin-top: 10px;"></p>
 
 <script>
 function flipCoin() {
-  const result = Math.random() < 0.5 ? "TAILS" : "HEADS";
+  const result = Math.random() < 0.5 ? "YIN" : "YANG";
   document.getElementById("result").innerText = "Result : " + result;
 }
 </script>
@@ -36,7 +36,7 @@ function hit() {
   player.push(drawCard());
   updateDisplay();
   if (getScore(player) > 21) {
-    document.getElementById("status").innerText = "Perdu ! 😵";
+    document.getElementById("status").innerText = "Looser ! 😵";
     gameOver = true;
   }
 }
@@ -49,11 +49,11 @@ function stand() {
   const playerScore = getScore(player);
   const dealerScore = getScore(dealer);
   if (dealerScore > 21 || playerScore > dealerScore) {
-    document.getElementById("status").innerText = "WINNER ! 🎉";
+    document.getElementById("status").innerText = "Winner ! 🎉";
   } else if (playerScore < dealerScore) {
-    document.getElementById("status").innerText = "LOOSER ! 😵";
+    document.getElementById("status").innerText = "Looser ! 😵";
   } else {
-    document.getElementById("status").innerText = "DRAW 🤝";
+    document.getElementById("status").innerText = "Draw 🤝";
   }
   gameOver = true;
   updateDisplay();
