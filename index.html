@@ -1,4 +1,15 @@
 <h1>Hello You!</h1>
+
+<h2>Game : Heads or Tales 🪙</h2>
+<button onclick="flipCoin()">Lancer la pièce</button>
+<p id="resultat" style="font-size: 1.5em; margin-top: 10px;"></p>
+
+<script>
+function flipCoin() {
+  const result = Math.random() < 0.5 ? "PILE" : "FACE";
+  document.getElementById("resultat").innerText = "Résultat : " + result;
+}
+</script>
 <pre>
 
    /gg\           /gg\ 
