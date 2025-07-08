@@ -7,9 +7,91 @@
 <script>
 function flipCoin() {
   const result = Math.random() < 0.5 ? "TAILS" : "HEADS";
-  document.getElementById("resultat").innerText = "Résultat : " + result;
+  document.getElementById("result").innerText = "Result : " + result;
 }
 </script>
+
+<h3>Game : Blackjack 🃏</h3>
+<button onclick="startGame()">New Game</button>
+<button onclick="hit()">Card +</button>
+<button onclick="stand()">Stand</button>
+<p id="status"></p>
+<p id="player">Player: </p>
+<p id="dealer">Dealer: </p>
+
+<script>
+let player = [], dealer = [], deck = [], gameOver = false;
+
+function startGame() {
+  deck = createDeck();
+  shuffleDeck();
+  player = [drawCard(), drawCard()];
+  dealer = [drawCard()];
+  gameOver = false;
+  updateDisplay();
+}
+
+function hit() {
+  if (gameOver) return;
+  player.push(drawCard());
+  updateDisplay();
+  if (getScore(player) > 21) {
+    document.getElementById("status").innerText = "Perdu ! 😵";
+    gameOver = true;
+  }
+}
+
+function stand() {
+  if (gameOver) return;
+  while (getScore(dealer) < 17) {
+    dealer.push(drawCard());
+  }
+  const playerScore = getScore(player);
+  const dealerScore = getScore(dealer);
+  if (dealerScore > 21 || playerScore > dealerScore) {
+    document.getElementById("status").innerText = "Gagné ! 🎉";
+  } else if (playerScore < dealerScore) {
+    document.getElementById("status").innerText = "Perdu ! 😵";
+  } else {
+    document.getElementById("status").innerText = "Égalité 🤝";
+  }
+  gameOver = true;
+  updateDisplay();
+}
+
+function createDeck() {
+  const cards = [];
+  const values = [2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11]; // valet, dame, roi = 10 ; as = 11
+  for (let i = 0; i < 4; i++) {
+    cards.push(...values);
+  }
+  return cards;
+}
+
+function shuffleDeck() {
+  deck.sort(() => Math.random() - 0.5);
+}
+
+function drawCard() {
+  return deck.pop();
+}
+
+function getScore(hand) {
+  let score = hand.reduce((a, b) => a + b, 0);
+  let aces = hand.filter(v => v === 11).length;
+  while (score > 21 && aces > 0) {
+    score -= 10;
+    aces--;
+  }
+  return score;
+}
+
+function updateDisplay() {
+  document.getElementById("player").innerText = "Player: " + player.join(", ") + " (Score: " + getScore(player) + ")";
+  document.getElementById("dealer").innerText = "Dealer: " + dealer.join(", ") + (gameOver ? " (Score: " + getScore(dealer) + ")" : "");
+}
+</script>
+
 <pre>
 
    /gg\           /gg\ 
