@@ -49,11 +49,11 @@ function stand() {
   const playerScore = getScore(player);
   const dealerScore = getScore(dealer);
   if (dealerScore > 21 || playerScore > dealerScore) {
-    document.getElementById("status").innerText = "Gagné ! 🎉";
+    document.getElementById("status").innerText = "WINNER ! 🎉";
   } else if (playerScore < dealerScore) {
-    document.getElementById("status").innerText = "Perdu ! 😵";
+    document.getElementById("status").innerText = "LOOSER ! 😵";
   } else {
-    document.getElementById("status").innerText = "Égalité 🤝";
+    document.getElementById("status").innerText = "DRAW 🤝";
   }
   gameOver = true;
   updateDisplay();
@@ -109,4 +109,5 @@ function updateDisplay() {
 |ggcccccgggg|ggggcccccgg| 
   \gcccggg\---/gggcccg/ 
      \ggggggggggggg/
+      SATTO - LABS
 </pre>
